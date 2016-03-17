@@ -14,7 +14,7 @@ namespace Polly.Retry
             if (!_sleepDurationsEnumerator.MoveNext()) return false;
 
             var currentTimeSpan = _sleepDurationsEnumerator.Current;
-            _onRetry(ex, currentTimeSpan, _context);
+            _onRetry(ex, currentTimeSpan, _context, _errorCount);
 
             await SystemClock.SleepAsync(currentTimeSpan, cancellationToken).ConfigureAwait(continueOnCapturedContext);
 
